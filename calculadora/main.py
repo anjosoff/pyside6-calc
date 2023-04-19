@@ -29,7 +29,6 @@ if __name__ == '__main__':
 
 # Display
     display=Display()
-    display.setPlaceholderText('Digite aqui...')
     window.addWidgetToVLayout(display)
 
 # Grid

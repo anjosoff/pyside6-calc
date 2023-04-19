@@ -62,9 +62,10 @@ class ButtonsGrid(QGridLayout):
                 button=Button(buttonText)
                 if  not isNumOrDot(buttonText) and not isEmpty(buttonText) :
                     button.setProperty('cssClass','specialButton')
+                    self._configSpecialButton(button)
                 self.addWidget(button, rowNumber, columNumber)
 
-                slot=self._makeButtonDisplaySlot(self._insertButtonTextToDisplay,button,)
+                slot=self._makeSlot(self._insertButtonTextToDisplay,button)
                 self._connectButtonClicked(button,slot)
 
 
@@ -72,9 +73,13 @@ class ButtonsGrid(QGridLayout):
 
          button.clicked.connect(slot)
 
-
-
-    def _makeButtonDisplaySlot(self, func, *args, **kwargs):
+    def _configSpecialButton(self,button):
+        text=button.text()
+        if text == 'C':
+            slot=self._makeSlot(self.display.clear)
+            self._connectButtonClicked(button,slot)
+    
+    def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
         def realSlot(_):
             func(*args, **kwargs)
