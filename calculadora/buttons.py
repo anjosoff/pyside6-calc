@@ -76,8 +76,9 @@ class ButtonsGrid(QGridLayout):
     def _configSpecialButton(self,button):
         text=button.text()
         if text == 'C':
-            slot=self._makeSlot(self.display.clear)
+            slot=self._makeSlot(self._clear, 'Limpo!')
             self._connectButtonClicked(button,slot)
+            #button.clicked.connect(self.display.clear)
     
     def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
@@ -96,3 +97,7 @@ class ButtonsGrid(QGridLayout):
             return 
 
         self.display.insert(buttonText) 
+
+    def _clear(self,msg):
+        self.display.clear()
+        self.display.setPlaceholderText(msg)
