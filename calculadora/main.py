@@ -20,6 +20,7 @@ if __name__ == '__main__':
     icon = QIcon(str(WINDOW_ICON_PATH))
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
+    app.setApplicationName('Calculadora')
 
 # History
 
