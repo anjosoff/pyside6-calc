@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
 # History
 
-    history=History('2.0 ^ 10.0 = 1024')
+    history=History('')
     window.addWidgetToVLayout(history)
 
 # Display
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     window.addWidgetToVLayout(display)
 
 # Grid
-    buttonsGrid= ButtonsGrid(display)
+    buttonsGrid= ButtonsGrid(display,history)
     window.v_layout.addLayout(buttonsGrid)
 
     

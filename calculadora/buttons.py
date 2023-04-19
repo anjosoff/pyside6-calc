@@ -38,7 +38,23 @@ class ButtonsGrid(QGridLayout):
     
         self.display=display
         self.history=history
+
+        #Getter and Setter
+        self._equation=''
+
+
+        self.equation='QUALQUER'
+
         self._makeGrid()
+    
+    @property
+    def equation(self):
+        return self._equation
+    @equation.setter
+    def equation(self, value):
+        self._equation=value
+        self.history.setText(value)
+
     def _makeGrid(self):
         
         for rowNumber,rowData in enumerate(self._gridMask):
@@ -48,15 +64,15 @@ class ButtonsGrid(QGridLayout):
                     button.setProperty('cssClass','specialButton')
                 self.addWidget(button, rowNumber, columNumber)
 
-                buttonSlot=self._makeButtonDisplaySlot(
-                    self._insertButtonTextToDisplay,
-                    button,
-
-                    )
-                button.clicked.connect(buttonSlot)
+                slot=self._makeButtonDisplaySlot(self._insertButtonTextToDisplay,button,)
+                self._connectButtonClicked(button,slot)
 
 
-                
+    def _connectButtonClicked(self, button, slot):
+
+         button.clicked.connect(slot)
+
+
 
     def _makeButtonDisplaySlot(self, func, *args, **kwargs):
         @Slot(bool)
